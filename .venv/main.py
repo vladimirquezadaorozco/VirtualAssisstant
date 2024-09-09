@@ -1,5 +1,9 @@
+from _datetime import datetime
 import speech_recognition as sr
 import pyttsx3
+import pywhatkit
+import wikipedia
+import pyjokes
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -29,7 +33,20 @@ def runJarvis():
     command = take_Command()
     print(command)
     if 'play' in command:
-        talk('playing')
-        print('playing')
+        song = command.replace('play', '')
+        talk('playing' + song)
+        pywhatkit.playonyt(song)
+    elif 'time' in command:
+        time = datetime.now().strftime('%I:%M %p')
+        print(time)
+        talk('the current time is' + time)
+    elif 'who is' in command:
+        person = command.replace('who is', '')
+        info = wikipedia.summary(person, 2)
+        print(info)
+        talk(info)
+    elif 'joke' in command:
+        talk(pyjokes.get_joke())
+
 
 runJarvis()
