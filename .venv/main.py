@@ -47,6 +47,8 @@ def runJarvis():
         talk(info)
     elif 'joke' in command:
         talk(pyjokes.get_joke())
+    else:
+        talk('Im sorry, could you please repeat that.')
 
-
-runJarvis()
+while True:
+    runJarvis()
